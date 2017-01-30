@@ -72,18 +72,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		// set drive mode to arcade - also reverse stick
 		myRobot.arcadeDrive(driveStick.getRawAxis(1), driveStick.getRawAxis(4));
 		double angle = gyro.getAngle();
+		System.out.println(angle);
 		
-		// Control pnumatics
 		solenoidControl();
-		// Control intake for balls
-		intakeControl();
-	}
-
-	// Control intake forthe balls
-	private void intakeControl() {
+		
+		// Control ball intake
 		if (driveStick.getRawButton(3)) {
 			intake.intake();
 		} else if (driveStick.getRawButton(2)) {
@@ -92,8 +87,8 @@ public class Robot extends IterativeRobot {
 			intake.stop();
 		}
 	}
-	
-	// Control solenoids for gear shift and for the cog intake
+
+	// Contol solenoids for gear shift and for the cog intake
 	private void solenoidControl() {
 		if (driveStick.getRawButton(1)) {
 			shifter.shiftUp();

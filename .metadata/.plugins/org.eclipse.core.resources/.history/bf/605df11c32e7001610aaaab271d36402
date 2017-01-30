@@ -82,7 +82,6 @@ public class Robot extends IterativeRobot {
 		intakeControl();
 	}
 
-	// Control intake forthe balls
 	private void intakeControl() {
 		if (driveStick.getRawButton(3)) {
 			intake.intake();
@@ -93,7 +92,7 @@ public class Robot extends IterativeRobot {
 		}
 	}
 	
-	// Control solenoids for gear shift and for the cog intake
+	// Contol solenoids for gear shift and for the cog intake
 	private void solenoidControl() {
 		if (driveStick.getRawButton(1)) {
 			shifter.shiftUp();

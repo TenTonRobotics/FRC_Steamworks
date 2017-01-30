@@ -76,13 +76,12 @@ public class Robot extends IterativeRobot {
 		myRobot.arcadeDrive(driveStick.getRawAxis(1), driveStick.getRawAxis(4));
 		double angle = gyro.getAngle();
 		
-		// Control pnumatics
 		solenoidControl();
-		// Control intake for balls
-		intakeControl();
+		
+		// Control ball intake
+
 	}
 
-	// Control intake forthe balls
 	private void intakeControl() {
 		if (driveStick.getRawButton(3)) {
 			intake.intake();
@@ -93,7 +92,7 @@ public class Robot extends IterativeRobot {
 		}
 	}
 	
-	// Control solenoids for gear shift and for the cog intake
+	// Contol solenoids for gear shift and for the cog intake
 	private void solenoidControl() {
 		if (driveStick.getRawButton(1)) {
 			shifter.shiftUp();
