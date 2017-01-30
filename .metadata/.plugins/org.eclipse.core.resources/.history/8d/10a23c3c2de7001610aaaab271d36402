@@ -78,8 +78,8 @@ public class Robot extends IterativeRobot {
 		
 		solenoidControl();
 		
-		// Control ball intake
 		if (driveStick.getRawButton(3)) {
+			// intakeMotor.set(0.9);
 			intake.intake();
 		} else if (driveStick.getRawButton(2)) {
 			intake.extake();
@@ -88,9 +88,10 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
-	// Contol solenoids for gear shift and for the cog intake
 	private void solenoidControl() {
 		if (driveStick.getRawButton(1)) {
+			//transmissionSol.set(true);
+			//sol2.set(false);
 			shifter.shiftUp();
 		}
 		if (driveStick.getRawButton(4)) {

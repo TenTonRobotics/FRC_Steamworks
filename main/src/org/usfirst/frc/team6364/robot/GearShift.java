@@ -10,26 +10,26 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-// Intake class - defines the methods for the robot intake
+// Class for controlling the gear shifter on the 2 speed pnumatic drive transmission
 
-public class Intake {
+public class GearShift {
 
-	private VictorSP intakeMotorA;
+	private Solenoid leftSol;
+	private Solenoid rightSol;
 	
-	public Intake(VictorSP intakeMotorA) {
-		this.intakeMotorA = intakeMotorA;
+	public GearShift(Solenoid leftSol, Solenoid rightSol) {
+		this.leftSol = leftSol;
+		this.rightSol = rightSol;
 	}
 	
-	public void intake() {
-		intakeMotorA.set(1.0);
+	public void shiftUp() {
+		leftSol.set(true);
+		rightSol.set(false);
 	}
 	
-	public void extake() {
-		intakeMotorA.set(-1.0);
-	}
-
-	public void stop() {
-		intakeMotorA.set(0);
+	public void shiftDown() {
+		leftSol.set(false);
+		rightSol.set(true);
 	}
 	
 }

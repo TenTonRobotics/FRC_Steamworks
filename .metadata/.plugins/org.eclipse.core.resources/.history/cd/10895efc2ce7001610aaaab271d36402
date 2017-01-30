@@ -20,12 +20,11 @@ public class Robot extends IterativeRobot {
 	
 	// Actuator init
 	private VictorSP intakeMotor = new VictorSP(4);
-	private Solenoid leftSol = new Solenoid(1);
-	private Solenoid rightSol = new Solenoid(2);
+	private Solenoid transmissionSol = new Solenoid(1);
+	private Solenoid sol2 = new Solenoid(2);
 	
 	// Object init
 	private Intake intake = new Intake(intakeMotor);
-	private GearShift shifter= new GearShift(leftSol, rightSol);
 
 	
 	/**
@@ -78,8 +77,8 @@ public class Robot extends IterativeRobot {
 		
 		solenoidControl();
 		
-		// Control ball intake
 		if (driveStick.getRawButton(3)) {
+			// intakeMotor.set(0.9);
 			intake.intake();
 		} else if (driveStick.getRawButton(2)) {
 			intake.extake();
@@ -88,13 +87,14 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
-	// Contol solenoids for gear shift and for the cog intake
 	private void solenoidControl() {
 		if (driveStick.getRawButton(1)) {
-			shifter.shiftUp();
+			transmissionSol.set(true);
+			sol2.set(false);
 		}
 		if (driveStick.getRawButton(4)) {
-			shifter.shiftDown();
+			sol2.set(true);
+			transmissionSol.set(false);
 		}
 	}
 	
