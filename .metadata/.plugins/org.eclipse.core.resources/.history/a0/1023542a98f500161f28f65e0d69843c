@@ -90,13 +90,13 @@ public class Robot extends IterativeRobot {
 		
 		// Six motor drive using arcade and the throttle curve
 		// For all prior to change :   + driveStick.getRawAxis(4)
-		rightTopDrive.set(driveStick.getRawAxis(1) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		rightFrontDrive.set(driveStick.getRawAxis(1) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		rightBackDrive.set(driveStick.getRawAxis(1) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
+		rightTopDrive.set(driveStick.getRawAxis(1) + driveStick.getRawAxis(4);//(-expo(4, 2)));
+		rightFrontDrive.set(driveStick.getRawAxis(1) + driveStick.getRawAxis(4);//(-expo(4, 2)));
+		rightBackDrive.set(driveStick.getRawAxis(1) + driveStick.getRawAxis(4);//(-expo(4, 2)));
 		
-		leftTopDrive.set((-driveStick.getRawAxis(1)) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		leftFrontDrive.set((-driveStick.getRawAxis(1)) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		leftBackDrive.set((-driveStick.getRawAxis(1)) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
+		leftTopDrive.set((-driveStick.getRawAxis(1)) + driveStick.getRawAxis(4);//(-expo(4, 2)));
+		leftFrontDrive.set((-driveStick.getRawAxis(1)) + driveStick.getRawAxis(4);//(-expo(4, 2)));
+		leftBackDrive.set((-driveStick.getRawAxis(1)) + driveStick.getRawAxis(4);//(-expo(4, 2)));
 		
 		// Control pnumatics
 		solenoidControl();
@@ -114,7 +114,7 @@ public class Robot extends IterativeRobot {
 		} else if (driveStick.getRawAxis(2) > 0.5) { // raw button 2
 			// intake.extake();
 			//intakeMotor.set(-1.0);
-			intakeMotor.set((-driveStick.getRawAxis(2)));
+			intakeMotor.set(driveStick.getRawAxis(2));
 		} else {
 			//intake.stop();
 			intakeMotor.set(0);

@@ -89,52 +89,49 @@ public class Robot extends IterativeRobot {
 		double angle = gyro.getAngle();
 		
 		// Six motor drive using arcade and the throttle curve
-		// For all prior to change :   + driveStick.getRawAxis(4)
-		rightTopDrive.set(driveStick.getRawAxis(1) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		rightFrontDrive.set(driveStick.getRawAxis(1) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		rightBackDrive.set(driveStick.getRawAxis(1) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
+		rightTopDrive.set(driveStick.getRawAxis(1) + driveStick.getRawAxis(4));
+		rightFrontDrive.set(driveStick.getRawAxis(1) + driveStick.getRawAxis(4));
+		rightBackDrive.set(driveStick.getRawAxis(1) + driveStick.getRawAxis(4));
 		
-		leftTopDrive.set((-driveStick.getRawAxis(1)) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		leftFrontDrive.set((-driveStick.getRawAxis(1)) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
-		leftBackDrive.set((-driveStick.getRawAxis(1)) + (driveStick.getRawAxis(4) * 0.50));//(-expo(4, 2)));
+		leftTopDrive.set((-driveStick.getRawAxis(1)) + driveStick.getRawAxis(4));
+		leftFrontDrive.set((-driveStick.getRawAxis(1)) + driveStick.getRawAxis(4));
+		leftBackDrive.set((-driveStick.getRawAxis(1)) + driveStick.getRawAxis(4));
 		
 		// Control pnumatics
 		solenoidControl();
 		// Control intake for balls
-		intakeControl();
+		//intakeControl();
 		// intakeMotor.set(driveStick.getRawAxis(5));
 	}
 
 	// Control intake for the balls
 	private void intakeControl() {
-		if (driveStick.getRawAxis(3) > 0.05) { // raw button 3
+		if (driveStick.getRawButton(3)) {
 			//intake.intake();
 			//intakeMotor.set(1.0);
-			intakeMotor.set(driveStick.getRawAxis(3));
-		} else if (driveStick.getRawAxis(2) > 0.5) { // raw button 2
+		} else if (driveStick.getRawButton(2)) {
 			// intake.extake();
 			//intakeMotor.set(-1.0);
-			intakeMotor.set((-driveStick.getRawAxis(2)));
 		} else {
 			//intake.stop();
-			intakeMotor.set(0);
+			//intakeMotor.set(0);
 		}
 	}
 	
 	// Control solenoids for gear shift and for the cog intake
 	private void solenoidControl() {
-		if (driveStick.getRawButton(6)) {
+		if (driveStick.getRawAxis(3) > 0.1) {
 			System.out.println("Shift A");
 			shifter.shiftUp();
 		}
-		if (driveStick.getRawButton(5)) {
+		if (driveStick.getRawAxis(2) > 0.1) {
 			System.out.println("Shift B");
 			shifter.shiftDown();
 		}
 	}
 	
-	private double expo(int axis, double gain) {
-		return gain * (Math.pow(driveStick.getRawAxis(axis), 3)) + (1 - gain) * driveStick.getRawAxis(axis);
+	private double expo(double gain) {
+		return gain * (Math.pow(driveStick.getRawAxis(4), 3)) + (1 - gain) * driveStick.getRawAxis(4);
 	}
 	
 	
