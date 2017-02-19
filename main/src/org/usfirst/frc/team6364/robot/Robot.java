@@ -14,6 +14,7 @@ import java.lang.Math;
 public class Robot extends IterativeRobot {
 	// RobotDrive myRobot = new RobotDrive(1, 0, 3, 2);
 	Joystick driveStick = new Joystick(0);
+	Joystick intakeStick = new Joystick(1);
 	Timer timer = new Timer();
 	
 	// Drive motors right side
@@ -29,7 +30,8 @@ public class Robot extends IterativeRobot {
 	private Gyro gyro = new AnalogGyro(0);
 	
 	// Actuator init
-	private VictorSP intakeMotor = new VictorSP(6);
+	private VictorSP intakeMotor = new VictorSP(6); // Intake motor
+	private VictorSP outLoadMotor = new VictorSP(7); // Outload motor
 	
 	private Solenoid leftSol = new Solenoid(1);
 	private Solenoid rightSol = new Solenoid(2);
@@ -38,7 +40,6 @@ public class Robot extends IterativeRobot {
 	// Object init
 	// private Intake intake = new Intake(intakeMotor);
 	private GearShift shifter = new GearShift(leftSol, rightSol);
-
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -63,11 +64,23 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		// Drive for 2 seconds
-		/* if (timer.get() < 2.0) {
-			myRobot.drive(-0.5, 0.0); // drive forwards half speed
+		if (timer.get() < 3.0) {
+			rightTopDrive.set(-0.60);
+			rightFrontDrive.set(-0.60);
+			rightBackDrive.set(-0.60);
+			
+			leftTopDrive.set(0.60);
+			leftFrontDrive.set(0.60);
+			leftBackDrive.set(0.60);
 		} else {
-			myRobot.drive(0.0, 0.0); // stop robot
-		}*/
+			rightTopDrive.set(0.0);
+			rightFrontDrive.set(0.0);
+			rightBackDrive.set(0.0);
+			
+			leftTopDrive.set(0.0);
+			leftFrontDrive.set(0.0);
+			leftBackDrive.set(0.0);
+		}
 	}
 
 	/**
@@ -103,6 +116,7 @@ public class Robot extends IterativeRobot {
 		// Control intake for balls
 		intakeControl();
 		// intakeMotor.set(driveStick.getRawAxis(5));
+		outLoadControl();
 	}
 
 	// Control intake for the balls
@@ -119,6 +133,10 @@ public class Robot extends IterativeRobot {
 			//intake.stop();
 			intakeMotor.set(0);
 		}
+	}
+	
+	private void outLoadControl() {
+		outLoadMotor.set(intakeStick.getRawAxis(1));
 	}
 	
 	// Control solenoids for gear shift and for the cog intake
